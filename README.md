@@ -36,3 +36,23 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+
+## Deploy
+
+Using the node js sveltekit adaptor, build the app. Then run `eb deploy`. Note, the .ebignore file pushes the necessary files to S3 for deployment.
+
+## [Prisma Docs](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases)
+
+* Create DB tables locally and migration changes: npx prisma migrate dev --name NAME
+* Create client code: npx prisma generate
+* View DB: npx prisma studio
+* Deploy migrations (in CICD): npx prisma migrate deploy
+* mysql -u root -p, USE mydb, DESCRIBE User
+
+## TODO
+
+* Define initial Group/Members/Messages table schemas. Generate migrations.
+* Use prisma client to interact with data. https://www.mikenikles.com/blog/svelte-kit-prisma-a-match-made-in-digital-heaven
+* Start working on the page structure.
+* Hard code functionality with users.
+* Amplify UI (with components https://github.com/aws-amplify/amplify-ui/issues/756 https://github.com/aws-amplify/amplify-ui/discussions/469 https://docs.amplify.aws/lib/auth/getting-started/q/platform/js/#option-1-use-pre-built-ui-components)

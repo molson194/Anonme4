@@ -1,0 +1,11 @@
+/node_modules
+/.svelte-kit
+.DS_Store
+.env
+/src
+/static
+.npmrc
+.prettierrc
+.gitignore
+/.git
+svelte.config.js
