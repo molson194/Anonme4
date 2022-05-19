@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Org {
+  id             String          @id @default(uuid())
+  name           String          @db.VarChar(50)
+  createdAt      DateTime        @default(now())
+  createdBy      String          @db.VarChar(36)
+  OrgMemberships OrgMembership[]
+  Messages       Message[]
+}
+
+model OrgMembership {
+  id     String @id @default(uuid())
+  org    Org    @relation(fields: [orgId], references: [id])
+  orgId  String @db.VarChar(36)
+  userId String @db.VarChar(36)
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  text      String   @db.VarChar(256)
+  userId    String   @db.VarChar(36)
+  timestamp DateTime @default(now())
+  org       Org      @relation(fields: [orgId], references: [id])
+  orgId     String   @db.VarChar(36)
+}
