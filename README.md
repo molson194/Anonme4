@@ -52,8 +52,7 @@ Using the node js sveltekit adaptor, build the app. Then run `eb deploy`. Note, 
 
 ## TODO
 
-* Use prisma client to interact with data. https://www.mikenikles.com/blog/svelte-kit-prisma-a-match-made-in-digital-heaven
-* Connect to real db with env variables in prod
 * Start working on the page structure.
 * Hard code functionality with users.
 * Amplify UI (with components https://github.com/aws-amplify/amplify-ui/issues/756 https://github.com/aws-amplify/amplify-ui/discussions/469 https://docs.amplify.aws/lib/auth/getting-started/q/platform/js/#option-1-use-pre-built-ui-components)
+* Stop hard-coding .env file

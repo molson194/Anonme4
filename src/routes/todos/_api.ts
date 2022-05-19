@@ -9,9 +9,17 @@
 	guarantees are made. Don't use it to organise your life.)
 */
 
-const base = 'https://api.svelte.dev';
+import { PrismaClient } from '@prisma/client';
 
-export function api(method: string, resource: string, data?: Record<string, unknown>) {
+const base = 'https://api.svelte.dev';
+const prisma = new PrismaClient();
+
+export async function api(method: string, resource: string, data?: Record<string, unknown>) {
+	const orgs = await prisma.org.findMany();
+	for (const org of orgs) {
+    console.log(`(${org.name}, ${org.id}, ${org.createdBy}, ${org.createdAt})`)
+	}
+
 	return fetch(`${base}/${resource}`, {
 		method,
 		headers: {
