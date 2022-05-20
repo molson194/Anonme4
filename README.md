@@ -43,16 +43,16 @@ Using the node js sveltekit adaptor, build the app. Then run `eb deploy`. Note, 
 
 ## [Prisma Docs](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases)
 
-* Start mysql: mysql.server start 
+* Start local mysql: mysql.server start 
 * Create DB tables locally and migration changes: npx prisma migrate dev --name NAME
 * Create client code: npx prisma generate
 * View DB: npx prisma studio
-* Deploy migrations (in CICD): npx prisma migrate deploy
-* Connect to mysql: mysql -u root -p, USE mydb, DESCRIBE User
+* Deploy migrations (in ebextensions or CICD): npx prisma migrate deploy
+* Connect to local mysql: mysql -u root -p, USE mydb, DESCRIBE User
+* Connect to [prod mysql](https://stackoverflow.com/questions/8344057/connect-to-mysql-on-aws-from-local-machine): mysql -h aamue2ydcjzfpz.cvjxt4diopmm.us-west-2.rds.amazonaws.com -P 3306 -u admin -p
 
 ## TODO
 
-* Start working on the page structure.
 * Hard code functionality with users.
 * Amplify UI (with components https://github.com/aws-amplify/amplify-ui/issues/756 https://github.com/aws-amplify/amplify-ui/discussions/469 https://docs.amplify.aws/lib/auth/getting-started/q/platform/js/#option-1-use-pre-built-ui-components)
 * Stop hard-coding .env file

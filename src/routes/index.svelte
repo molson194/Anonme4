@@ -1,9 +1,6 @@
-<script context="module" lang="ts">
-	export const prerender = true;
-</script>
-
 <script lang="ts">
-	import Counter from '$lib/Counter.svelte';
+	import type { Org } from '@prisma/client';
+	export let orgs: Org[]
 </script>
 
 <svelte:head>
@@ -11,27 +8,22 @@
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<section>
-	<h1>
-		<div class="welcome">
-			<picture>
-				<source srcset="svelte-welcome.webp" type="image/webp" />
-				<img src="svelte-welcome.png" alt="Welcome" />
-			</picture>
-		</div>
+<div class="groups">
+	<h1>Groups</h1>
 
-		to your new<br />SvelteKit app
-	</h1>
+	{#each orgs as org (org.id)}
+		<a href="/{org.id}">{org.name}</a>
+	{/each}
 
-	<h2>
-		try editing <strong>src/routes/index.svelte</strong>
-	</h2>
+	<form method="post">
+		<input type="text" name="name" />
+		<button type="submit">Submit</button>
+	</form>
 
-	<Counter />
-</section>
+</div>
 
 <style>
-	section {
+	div {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -41,20 +33,5 @@
 
 	h1 {
 		width: 100%;
-	}
-
-	.welcome {
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
 	}
 </style>
