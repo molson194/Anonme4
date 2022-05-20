@@ -53,6 +53,7 @@ Using the node js sveltekit adaptor, build the app. Then run `eb deploy`. Note, 
 
 ## TODO
 
-* Hard code functionality with users.
-* Amplify UI (with components https://github.com/aws-amplify/amplify-ui/issues/756 https://github.com/aws-amplify/amplify-ui/discussions/469 https://docs.amplify.aws/lib/auth/getting-started/q/platform/js/#option-1-use-pre-built-ui-components)
-* Stop hard-coding .env file
+* Cognito Amplify UI (with components https://github.com/aws-amplify/amplify-ui/issues/756 https://github.com/aws-amplify/amplify-ui/discussions/469 https://docs.amplify.aws/lib/auth/getting-started/q/platform/js/#option-1-use-pre-built-ui-components). Sign in and propogate user token. --> PUSH
+* Submit form prevent default
+* Stop hard-coding .env file --> PUSH
+* Subscribe to new messages
