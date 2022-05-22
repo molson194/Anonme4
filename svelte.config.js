@@ -10,9 +10,11 @@ const config = {
 	kit: {
 		adapter: adapter(),
 
-		// Override http methods in the Todo forms
-		methodOverride: {
-			allowed: ['PATCH', 'DELETE']
+		// Fixes global is not defined error
+		vite: {
+			define: {
+					global: {}
+			}
 		}
 	}
 };

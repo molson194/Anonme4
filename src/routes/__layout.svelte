@@ -1,3 +1,18 @@
+<script context="module" lang="ts">
+	import type { Load, LoadInput } from '@sveltejs/kit'
+
+	export const load: Load = ({url, session} : LoadInput) => {
+		if (url.pathname != "/login" && session.accessToken == null) {
+			return {
+				status: 302,
+				redirect: "/login"
+			}
+		}
+
+		return {};
+	}
+</script>
+
 <script lang="ts">
 	import Header from '$lib/header/Header.svelte';
 	import '../app.css';

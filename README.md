@@ -53,7 +53,13 @@ Using the node js sveltekit adaptor, build the app. Then run `eb deploy`. Note, 
 
 ## TODO
 
-* Cognito Amplify UI (with components https://github.com/aws-amplify/amplify-ui/issues/756 https://github.com/aws-amplify/amplify-ui/discussions/469 https://docs.amplify.aws/lib/auth/getting-started/q/platform/js/#option-1-use-pre-built-ui-components). Sign in and propogate user token. --> PUSH
-* Submit form prevent default
-* Stop hard-coding .env file --> PUSH
-* Subscribe to new messages
+* for groups/messages/login form prevent default
+* Move index.ts to api/groupsSubmit 
+* Update fetch to send token and validate token on api request
+* Stop hard-coding .env file, "Matt", "molson194", clientid --> PUSH
+* Get rid of extra pages
+* Sign out button
+* Cognito signup, confirm code
+* Redirect after successful login/signup to original page
+* Subscribe to new messages using prisma middleware
+* Formatting css
