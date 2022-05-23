@@ -1,3 +1,23 @@
+<script context="module" lang="ts">
+	import type { Load, LoadInput } from '@sveltejs/kit'
+
+	export const load: Load = async ({fetch} : LoadInput) => {
+		const response = await fetch('/api/groups', {
+			method: 'GET',
+			headers: {
+				'Accept': 'application/json'
+			}
+		})
+
+		var responseData: { orgs: Org[] } = await response.json()
+		return {
+			props: {
+				orgs: responseData.orgs
+			}
+		};
+	}
+</script>
+
 <script lang="ts">
 	import type { Org } from '@prisma/client';
 	export let orgs: Org[]
@@ -6,7 +26,7 @@
 
 	async function onSubmit() {
 		// TODO: Disable button
-    const response = await fetch('/', {
+    const response = await fetch('/api/groups', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

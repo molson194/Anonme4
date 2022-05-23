@@ -1,6 +1,7 @@
 <script lang="ts">
   import { CognitoUserPool, AuthenticationDetails, CognitoUser } from 'amazon-cognito-identity-js';
   import { goto } from '$app/navigation';
+  import { session } from '$app/stores';
 
   async function onSubmit() {
     var poolData = {
@@ -29,6 +30,7 @@
         console.log("Successfully stored tokens to cookies")
         var expiration = new Date(result.getAccessToken().getExpiration() * 1000)
         document.cookie = `accessToken=${result.getAccessToken().getJwtToken()}; expires=${expiration.toUTCString()}`
+        $session.accessToken = "exists"
 
         // TODO: redirect to home page OR expected group
         goto(`${window.location.protocol}//${window.location.hostname}:${window.location.port}`)
