@@ -53,13 +53,13 @@ Using the node js sveltekit adaptor, build the app. Then run `eb deploy`. Note, 
 
 ## TODO
 
-* for groups/messages/login form prevent default
-* Move index.ts to api/groupsSubmit 
-* Update fetch to send token and validate token on api request
+* Move index.ts to api/groupsSubmit and move redirect into each loader
+* Update fetch to send token and validate token on api request --> PUSH
 * Stop hard-coding .env file, "Matt", "molson194", clientid --> PUSH
 * Get rid of extra pages
+* Redirect after successful login to original page
 * Sign out button
 * Cognito signup, confirm code
-* Redirect after successful login/signup to original page
+* Refresh token if api request fails with 40*
 * Subscribe to new messages using prisma middleware
 * Formatting css

@@ -12,14 +12,18 @@ export const get: RequestHandler = async ({ locals }) => {
 };
 
 export const post: RequestHandler = async ({ request, locals }) => {
-	const form = await request.formData();
+	const body = await request.json()
 
-	await prisma.org.create({
+	const newOrg = await prisma.org.create({
 		data: {
-			name: form.get('name')?.toString()!,
+			name: body['groupName'],
 			createdBy: "Matt"
 		}
 	})
 
-	return {};
+	return {
+		body : {
+			org: newOrg
+		}
+	}
 };

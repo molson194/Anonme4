@@ -1,6 +1,26 @@
 <script lang="ts">
 	import type { Org } from '@prisma/client';
 	export let orgs: Org[]
+
+	let groupName = '';
+
+	async function onSubmit() {
+		// TODO: Disable button
+    const response = await fetch('/', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Accept': 'application/json'
+			},
+			body: JSON.stringify({ groupName: groupName })
+		})
+
+		groupName = ''
+		const responseData : {org: Org} = await response.json()
+		orgs = [...orgs, responseData.org]
+
+		// TODO: re-enable button
+  }
 </script>
 
 <svelte:head>
@@ -15,8 +35,8 @@
 		<a href="/{org.id}">{org.name}</a>
 	{/each}
 
-	<form method="post">
-		<input type="text" name="name" />
+	<form on:submit|preventDefault={onSubmit}>
+		<input bind:value={groupName} type="text" placeholder="New Group Name" />
 		<button type="submit">Submit</button>
 	</form>
 

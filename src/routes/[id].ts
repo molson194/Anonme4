@@ -16,15 +16,19 @@ export const get: RequestHandler = async ({ params }) => {
 };
 
 export const post: RequestHandler = async ({ request, params }) => {
-	const form = await request.formData();
+	const body = await request.json()
 
-	await prisma.message.create({
+	const newMessage = await prisma.message.create({
 		data: {
-			text: form.get('text')?.toString()!,
+			text: body['newMessage'],
 			userId: "Matt",
       orgId: params.id
 		}
 	})
 
-	return {};
+	return {
+		body : {
+			message: newMessage
+		}
+	}
 };

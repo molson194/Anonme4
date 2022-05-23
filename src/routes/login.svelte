@@ -1,19 +1,19 @@
-<script context="module" lang="ts">
-	import type { Load, LoadInput } from '@sveltejs/kit'
+<script lang="ts">
   import { CognitoUserPool, AuthenticationDetails, CognitoUser } from 'amazon-cognito-identity-js';
+  import { goto } from '$app/navigation';
 
-  export const load: Load = ({url, session} : LoadInput) => {
+  async function onSubmit() {
     var poolData = {
       UserPoolId: 'us-west-2_0TZ1kwGbm',
       ClientId: '3fgh7ffl69lao12371amvo3uso',
     };
 
+    const userPool = new CognitoUserPool(poolData)
+
     var authenticationData = {
       Username: 'molson194+test1@gmail.com',
       Password: '****',
     };
-
-    const userPool = new CognitoUserPool(poolData)
     
     const authenticationDetails = new AuthenticationDetails(authenticationData)
 
@@ -26,9 +26,12 @@
 
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: function(result) {
-        console.log("Successfully stored tokens to localstorage")
-        session.accessToken = result.getAccessToken().getJwtToken()
+        console.log("Successfully stored tokens to cookies")
+        var expiration = new Date(result.getAccessToken().getExpiration() * 1000)
+        document.cookie = `accessToken=${result.getAccessToken().getJwtToken()}; expires=${expiration.toUTCString()}`
+
         // TODO: redirect to home page OR expected group
+        goto(`${window.location.protocol}//${window.location.hostname}:${window.location.port}`)
       },
 
       onFailure: function(err) {
@@ -36,8 +39,6 @@
         alert(err)
       }
     })
-
-    return {};
   }
 </script>
 
@@ -49,7 +50,7 @@
 <div class="login">
 	<h1>Login</h1>
 
-  <form method="post">
+  <form on:submit|preventDefault={onSubmit}>
 		<button type="submit">Login</button>
 	</form>
 </div>

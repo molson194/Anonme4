@@ -5,6 +5,7 @@
 declare namespace App {
 	interface Locals {
 		userid: string;
+		accessToken: string | null;
 	}
 
 	// interface Platform {}
