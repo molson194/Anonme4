@@ -6,11 +6,19 @@ const prisma = new PrismaClient();
 
 export const get: RequestHandler = async ({ request, locals }) => {
 	try {
-		await validate(request.headers)
+		const payload = await validate(request.headers)
 
 		return {
 			body: {
-				orgs: await prisma.org.findMany()
+				orgs: await prisma.org.findMany({
+					where: {
+						OrgMemberships: {
+							some: {
+								userId: payload.sub
+							}
+						}
+					}
+				})
 			}
 		};
 	} catch (error) {
@@ -24,13 +32,18 @@ export const get: RequestHandler = async ({ request, locals }) => {
 
 export const post: RequestHandler = async ({ request, locals }) => {
 	try {
-		await validate(request.headers)
+		const payload = await validate(request.headers)
 		const body = await request.json()
 
 		const newOrg = await prisma.org.create({
 			data: {
 				name: body['groupName'],
-				createdBy: "Matt"
+				createdBy: payload.sub,
+				OrgMemberships: {
+					create: [
+						{ userId: payload.sub }
+					]
+				}
 			}
 		})
 

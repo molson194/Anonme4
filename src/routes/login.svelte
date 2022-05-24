@@ -2,24 +2,28 @@
   import { CognitoUserPool, AuthenticationDetails, CognitoUser } from 'amazon-cognito-identity-js';
   import { goto } from '$app/navigation';
   import { session } from '$app/stores';
+  import { userPoolId, clientId } from '$lib/auth';
 
-  async function onSubmit() {
-    var poolData = {
-      UserPoolId: 'us-west-2_0TZ1kwGbm',
-      ClientId: '3fgh7ffl69lao12371amvo3uso',
+  let username = '';
+  let password = '';
+
+  var poolData = {
+      UserPoolId: userPoolId,
+      ClientId: clientId,
     };
 
-    const userPool = new CognitoUserPool(poolData)
+  const userPool = new CognitoUserPool(poolData)
 
+  async function onSubmit() {
     var authenticationData = {
-      Username: 'molson194+test1@gmail.com',
-      Password: '****',
+      Username: username,
+      Password: password,
     };
     
     const authenticationDetails = new AuthenticationDetails(authenticationData)
 
     var userData = {
-      Username: 'molson194+test1@gmail.com',
+      Username: username,
       Pool: userPool,
     };
 
@@ -53,6 +57,8 @@
 	<h1>Login</h1>
 
   <form on:submit|preventDefault={onSubmit}>
+    <input bind:value={username} type="text" placeholder="Email" />
+    <input bind:value={password} type="password" placeholder="Password" />
 		<button type="submit">Login</button>
 	</form>
 </div>

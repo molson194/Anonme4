@@ -6,7 +6,9 @@ const prisma = new PrismaClient();
 
 export const get: RequestHandler = async ({ request, params }) => {
 	try {
-		await validate(request.headers)
+		const payload = await validate(request.headers)
+		await userBelongsToOrg(params.id, payload.sub)
+		
 		return {
 			body: {
 				messages: await prisma.message.findMany({
@@ -27,13 +29,15 @@ export const get: RequestHandler = async ({ request, params }) => {
 
 export const post: RequestHandler = async ({ request, params }) => {
 	try {
-		await validate(request.headers)
+		const payload = await validate(request.headers)
+		await userBelongsToOrg(params.id, payload.sub)
+
 		const body = await request.json()
 
 		const newMessage = await prisma.message.create({
 			data: {
 				text: body['newMessage'],
-				userId: "Matt",
+				userId: payload.sub,
 				orgId: params.id
 			}
 		})
@@ -51,3 +55,13 @@ export const post: RequestHandler = async ({ request, params }) => {
 		}
 	}
 };
+
+async function userBelongsToOrg(orgId: string, userId: string) {
+	await prisma.orgMembership.findFirst({
+		rejectOnNotFound: true,
+		where: {
+			orgId:  orgId,
+			userId: userId
+		}
+	})
+}

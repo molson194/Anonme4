@@ -53,7 +53,6 @@ Using the node js sveltekit adaptor, build the app. Then run `eb deploy`. Note, 
 
 ## TODO
 
-* Stop hard-coding .env file, "Matt", "molson194", clientid --> PUSH
 * Get rid of extra pages
 * Redirect after successful login to original page
 * Sign out button

@@ -14,6 +14,13 @@ const config = {
 		vite: {
 			define: {
 					global: {}
+			},
+			build: {
+				rollupOptions: {
+					external: [
+						"aws-jwt-verify"
+					]
+				}
 			}
 		}
 	}
