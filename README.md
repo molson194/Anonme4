@@ -53,7 +53,6 @@ Using the node js sveltekit adaptor, build the app. Then run `eb deploy`. Note, 
 
 ## TODO
 
-* Update fetch to send token and validate token on api request --> PUSH
 * Stop hard-coding .env file, "Matt", "molson194", clientid --> PUSH
 * Get rid of extra pages
 * Redirect after successful login to original page
