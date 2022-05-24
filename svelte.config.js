@@ -1,5 +1,6 @@
 import adapter from '@sveltejs/adapter-node';
 import preprocess from 'svelte-preprocess';
+import resolve from "@rollup/plugin-node-resolve";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -17,9 +18,7 @@ const config = {
 			},
 			build: {
 				rollupOptions: {
-					external: [
-						"aws-jwt-verify"
-					]
+					plugins: [resolve({ browser: true })]
 				}
 			}
 		}

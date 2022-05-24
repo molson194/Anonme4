@@ -17,6 +17,7 @@
     "start": "node build/index.js"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.3.0",
     "@sveltejs/adapter-node": "^1.0.0-next.73",
     "@types/cookie": "^0.4.1",
     "prettier": "^2.5.1",
