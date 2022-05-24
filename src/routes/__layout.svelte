@@ -5,7 +5,7 @@
 		if (url.pathname != "/login" && session.accessToken == null) {
 			return {
 				status: 302,
-				redirect: "/login"
+				redirect: `/login?referrer=${url.pathname}`
 			}
 		}
 

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { CognitoUserPool, AuthenticationDetails, CognitoUser } from 'amazon-cognito-identity-js';
   import { goto } from '$app/navigation';
-  import { session } from '$app/stores';
+  import { session, page } from '$app/stores';
   import { userPoolId, clientId } from '$lib/auth';
 
   let username = '';
@@ -36,8 +36,9 @@
         document.cookie = `accessToken=${result.getAccessToken().getJwtToken()}; expires=${expiration.toUTCString()}`
         $session.accessToken = "exists"
 
-        // TODO: redirect to home page OR expected group
-        goto(`${window.location.protocol}//${window.location.hostname}:${window.location.port}`)
+        const referrer = $page.url.searchParams.get('referrer') || ""
+        console.log(`${window.location.protocol}//${window.location.hostname}:${window.location.port}${referrer}`)
+        goto(`${window.location.protocol}//${window.location.hostname}:${window.location.port}${referrer}`)
       },
 
       onFailure: function(err) {
