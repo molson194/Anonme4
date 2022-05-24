@@ -53,7 +53,6 @@ Using the node js sveltekit adaptor, build the app. Then run `eb deploy`. Note, 
 
 ## TODO
 
-* Get rid of extra pages
 * Redirect after successful login to original page
 * Sign out button
 * Change locals/session to accessTokenExists (use cookie to validate request)
