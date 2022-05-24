@@ -4,14 +4,13 @@
 // for information about these interfaces
 declare namespace App {
 	interface Locals {
-		userid: string;
-		accessToken: string | null;
+		accessTokenExists: boolean;
 	}
 
 	// interface Platform {}
 
 	interface Session {
-		accessToken: string | null;
+		accessTokenExists: boolean;
 	}
 
 	// interface Stuff {}

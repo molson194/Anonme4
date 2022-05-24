@@ -27,10 +27,8 @@
         console.log("Successfully stored tokens to cookies")
         var expiration = new Date(result.getAccessToken().getExpiration() * 1000)
         document.cookie = `accessToken=${result.getAccessToken().getJwtToken()}; expires=${expiration.toUTCString()}`
-        $session.accessToken = "exists"
-
+        $session.accessTokenExists = true
         const referrer = $page.url.searchParams.get('referrer') || ""
-        console.log(`${window.location.protocol}//${window.location.hostname}:${window.location.port}${referrer}`)
         goto(`${window.location.protocol}//${window.location.hostname}:${window.location.port}${referrer}`)
       },
 

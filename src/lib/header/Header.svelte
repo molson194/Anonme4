@@ -3,11 +3,9 @@
 	import { userPool } from '$lib/auth';
 	import logo from './svelte-logo.svg';
 
-	let accessTokenExists = $session.accessToken != null
-
 	function onSubmit() {
 		userPool.getCurrentUser()?.signOut(() => {
-			$session.accessToken = null
+			$session.accessTokenExists = false
 			document.cookie = 'accessToken=; Max-Age=-99999999;';
 		})
 	}
@@ -37,7 +35,7 @@
 
 	<div class="corner">
 		<!-- TODO put something else here? github link? -->
-		{#if accessTokenExists}
+		{#if $session.accessTokenExists}
 			<button on:click="{onSubmit}">Sign Out</button>
 		{/if}
 	</div>

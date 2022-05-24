@@ -53,9 +53,13 @@ Using the node js sveltekit adaptor, build the app. Then run `eb deploy`. Note, 
 
 ## TODO
 
-* Change locals/session to accessTokenExists (use cookie to validate request)
 * Cognito signup, confirm code
 * Refresh token if api request fails with 40*
 * Access code and joining groups
+
+## Optional 
+
+* Fix up login + header stuff
+* ELB health check
 * Subscribe to new messages using prisma middleware
 * Formatting css
