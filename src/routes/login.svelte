@@ -1,18 +1,11 @@
 <script lang="ts">
-  import { CognitoUserPool, AuthenticationDetails, CognitoUser } from 'amazon-cognito-identity-js';
+  import { AuthenticationDetails, CognitoUser } from 'amazon-cognito-identity-js';
   import { goto } from '$app/navigation';
   import { session, page } from '$app/stores';
-  import { userPoolId, clientId } from '$lib/auth';
+  import { userPool } from '$lib/auth';
 
   let username = '';
   let password = '';
-
-  var poolData = {
-      UserPoolId: userPoolId,
-      ClientId: clientId,
-    };
-
-  const userPool = new CognitoUserPool(poolData)
 
   async function onSubmit() {
     var authenticationData = {
