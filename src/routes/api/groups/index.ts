@@ -11,6 +11,9 @@ export const get: RequestHandler = async ({ request, locals }) => {
 		return {
 			body: {
 				orgs: await prisma.org.findMany({
+					orderBy: {
+						name: 'asc'
+					},
 					where: {
 						OrgMemberships: {
 							some: {

@@ -54,6 +54,5 @@ Using the node js sveltekit adaptor, build the app. Then run `eb deploy`. Note, 
 
 ## TODO 
 
-* Order messages
 * Subscribe to new messages using prisma middleware
 * Formatting css

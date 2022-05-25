@@ -33,6 +33,9 @@ export const get: RequestHandler = async ({ request, params }) => {
 	return {
 		body: {
 			messages: await prisma.message.findMany({
+				orderBy: {
+					timestamp: 'asc'
+				},
 				where: {
 					orgId: params.id
 				}
