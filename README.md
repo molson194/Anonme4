@@ -54,6 +54,5 @@ Using the node js sveltekit adaptor, build the app. Then run `eb deploy`. Note, 
 ## TODO 
 
 * Fix up login + header stuff
-* ELB health check
 * Subscribe to new messages using prisma middleware
 * Formatting css
