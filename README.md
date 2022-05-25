@@ -43,6 +43,7 @@ Using the node js sveltekit adaptor, build the app. Then run `eb deploy`. Note, 
 
 ## [Prisma Docs](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases)
 
+* Create .env file with DATABASE_URL=**** for prisma
 * Start local mysql: mysql.server start 
 * Create DB tables locally and migration changes: npx prisma migrate dev --name NAME
 * Create client code: npx prisma generate
@@ -53,6 +54,6 @@ Using the node js sveltekit adaptor, build the app. Then run `eb deploy`. Note, 
 
 ## TODO 
 
-* Fix up login + header stuff
+* Order messages
 * Subscribe to new messages using prisma middleware
 * Formatting css

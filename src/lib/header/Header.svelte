@@ -34,9 +34,7 @@
 	</nav>
 
 	<div class="corner">
-		{#if $session.accessTokenExists}
-			<button on:click="{onSubmit}">Sign Out</button>
-		{/if}
+		<button on:click="{onSubmit}">Sign Out</button>
 	</div>
 </header>
 

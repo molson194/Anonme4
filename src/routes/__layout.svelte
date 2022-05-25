@@ -25,9 +25,12 @@
 <script lang="ts">
 	import Header from '$lib/header/Header.svelte';
 	import '../app.css';
+	import { session } from '$app/stores';
 </script>
 
-<Header />
+{#if $session.accessTokenExists}
+	<Header />
+{/if}
 
 <main>
 	<slot />
