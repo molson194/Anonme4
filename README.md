@@ -53,7 +53,6 @@ Using the node js sveltekit adaptor, build the app. Then run `eb deploy`. Note, 
 
 ## TODO
 
-* Refresh token if api request fails with 40*
 * Access code and joining groups
 
 ## Optional 

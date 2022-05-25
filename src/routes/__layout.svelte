@@ -1,7 +1,13 @@
 <script context="module" lang="ts">
 	import type { Load, LoadInput } from '@sveltejs/kit'
+	import { refreshTokenIfNeeded } from '$lib/auth';
+	import { browser } from '$app/env'; 
 
 	export const load: Load = ({url, session} : LoadInput) => {
+		if (browser) {
+			refreshTokenIfNeeded(session, document, location)
+		}
+
 		if (url.pathname != "/login"
 		    && url.pathname != "/signup"
 		    && url.pathname != "/confirm"
