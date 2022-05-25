@@ -39,6 +39,7 @@ export const post: RequestHandler = async ({ request, locals }) => {
 			data: {
 				name: body['groupName'],
 				createdBy: payload.sub,
+				accessCode: body['accessCode'],
 				OrgMemberships: {
 					create: [
 						{ userId: payload.sub }

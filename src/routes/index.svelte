@@ -29,6 +29,7 @@
 	export let orgs: Org[]
 
 	let groupName = '';
+	let accessCode = '';
 
 	async function onSubmit() {
 		// TODO: Disable button
@@ -38,10 +39,11 @@
 				'Content-Type': 'application/json',
 				'Accept': 'application/json'
 			},
-			body: JSON.stringify({ groupName: groupName })
+			body: JSON.stringify({ groupName: groupName, accessCode: accessCode })
 		})
 
 		groupName = ''
+		accessCode = ''
 		const responseData : {org: Org} = await response.json()
 		orgs = [...orgs, responseData.org]
 
@@ -63,6 +65,7 @@
 
 	<form on:submit|preventDefault={onSubmit}>
 		<input bind:value={groupName} type="text" placeholder="New Group Name" />
+		<input bind:value={accessCode} type="text" placeholder="Access Code" maxlength="6"/>
 		<button type="submit">Submit</button>
 	</form>
 

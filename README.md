@@ -51,11 +51,7 @@ Using the node js sveltekit adaptor, build the app. Then run `eb deploy`. Note, 
 * Connect to local mysql: mysql -u root -p, USE mydb, DESCRIBE User
 * Connect to [prod mysql](https://stackoverflow.com/questions/8344057/connect-to-mysql-on-aws-from-local-machine): mysql -h aamue2ydcjzfpz.cvjxt4diopmm.us-west-2.rds.amazonaws.com -P 3306 -u admin -p
 
-## TODO
-
-* Access code and joining groups
-
-## Optional 
+## TODO 
 
 * Fix up login + header stuff
 * ELB health check

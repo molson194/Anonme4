@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Org` ADD COLUMN `accessCode` VARCHAR(6) NOT NULL DEFAULT '000000';

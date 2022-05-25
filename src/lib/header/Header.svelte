@@ -34,7 +34,6 @@
 	</nav>
 
 	<div class="corner">
-		<!-- TODO put something else here? github link? -->
 		{#if $session.accessTokenExists}
 			<button on:click="{onSubmit}">Sign Out</button>
 		{/if}

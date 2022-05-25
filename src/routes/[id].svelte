@@ -15,10 +15,11 @@
 			}
 		})
 
-		var responseData: { messages: Message[] } = await response.json()
+		var responseData: { messages: Message[], hasAccess: boolean } = await response.json()
 		return {
 			props: {
-				messages: responseData.messages
+				messages: responseData.messages,
+				hasAccess: responseData.hasAccess
 			}
 		};
 	}
@@ -28,8 +29,10 @@
 	import type { Message } from '@prisma/client';
 	import { page } from '$app/stores';
 	export let messages: Message[]
+	export let hasAccess: boolean
 
 	let newMessage = '';
+	let accessCode = ''
 
 	async function onSubmit() {
 		// TODO: Disable button
@@ -48,6 +51,22 @@
 
 		// TODO: re-enable button
 	}
+
+	async function joinGroup() {
+		const response = await fetch(`/api/groups${$page.url.pathname}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Accept': 'application/json'
+			},
+			body: JSON.stringify({ accessCode: accessCode })
+		})
+
+		accessCode = ''
+		const responseData : {messages: Message[], hasAccess: boolean} = await response.json()
+		messages = responseData.messages
+		hasAccess = responseData.hasAccess
+	}
 </script>
 
 <svelte:head>
@@ -55,19 +74,29 @@
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<div class="messages">
-	<h1>Messages</h1>
+{#if !hasAccess}
+	<div class="accessCode">
+		<h1>Access Code</h1>
+		<form on:submit|preventDefault={joinGroup}>
+			<input bind:value={accessCode} type="text" placeholder="Access code" />
+			<button type="submit">Join Group</button>
+		</form>
+	</div>
+{:else}
+	<div class="messages">
+		<h1>Messages</h1>
 
-	{#each messages as message (message.id)}
-		<p>{message.text}</p>
-	{/each}
+		{#each messages as message (message.id)}
+			<p>{message.text}</p>
+		{/each}
 
-	<form on:submit|preventDefault={onSubmit}>
-		<input bind:value={newMessage} type="text" placeholder="Message text..." />
-		<button type="submit">Send</button>
-	</form>
+		<form on:submit|preventDefault={onSubmit}>
+			<input bind:value={newMessage} type="text" placeholder="Message text..." />
+			<button type="submit">Send</button>
+		</form>
 
-</div>
+	</div>
+{/if}
 
 <style>
 	div {
