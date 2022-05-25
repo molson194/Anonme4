@@ -2,10 +2,13 @@
 	import type { Load, LoadInput } from '@sveltejs/kit'
 
 	export const load: Load = ({url, session} : LoadInput) => {
-		if (url.pathname != "/login" && !session.accessTokenExists) {
+		if (url.pathname != "/login"
+		    && url.pathname != "/signup"
+		    && url.pathname != "/confirm"
+				&& !session.accessTokenExists) {
 			return {
 				status: 302,
-				redirect: `/login?referrer=${url.pathname}`
+				redirect: `/login?referrer=${encodeURIComponent(url.pathname)}`
 			}
 		}
 

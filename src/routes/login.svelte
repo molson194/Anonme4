@@ -4,8 +4,10 @@
   import { session, page } from '$app/stores';
   import { userPool } from '$lib/auth';
 
-  let username = '';
+  let username = $page.url.searchParams.get('username') ? decodeURIComponent($page.url.searchParams.get('username')!) : "";
   let password = '';
+
+  const referrer = $page.url.searchParams.get('referrer') || ""
 
   async function onSubmit() {
     var authenticationData = {
@@ -28,8 +30,7 @@
         var expiration = new Date(result.getAccessToken().getExpiration() * 1000)
         document.cookie = `accessToken=${result.getAccessToken().getJwtToken()}; expires=${expiration.toUTCString()}`
         $session.accessTokenExists = true
-        const referrer = $page.url.searchParams.get('referrer') || ""
-        goto(`${window.location.protocol}//${window.location.hostname}:${window.location.port}${referrer}`)
+        goto(`${$page.url.protocol}//${$page.url.hostname}:${$page.url.port}${decodeURIComponent(referrer)}`)
       },
 
       onFailure: function(err) {
@@ -53,4 +54,6 @@
     <input bind:value={password} type="password" placeholder="Password" />
 		<button type="submit">Login</button>
 	</form>
+
+  <p>Or <a href="/signup?referrer={encodeURIComponent(referrer)}">Sign Up</a></p>
 </div>
